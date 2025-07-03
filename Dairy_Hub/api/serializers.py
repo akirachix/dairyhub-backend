@@ -1,18 +1,15 @@
-
-
 from rest_framework import serializers
-from users.models import User
-from rest_framework import serializers
-from Payment.models import Payment
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta: 
-        model = User
-        fields = "__all__"
+from products.models import Product
 
+from orderItems.models import OrderItem
 
-class PaymentSerializer(serializers.ModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
        class Meta:
-              model=Payment
+              model=Product
               fields= "__all__"
 
+class OrderItemSerializer(serializers.ModelSerializer):
+       class Meta:
+              model=OrderItem
+              fields= "__all__"
