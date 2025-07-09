@@ -1,7 +1,7 @@
 
 from django.test import TestCase
 
-Create your tests here.
+# Create your tests here.
 from django.test import TestCase
 
 # # Create your tests here.
@@ -50,15 +50,10 @@ class OrderTests(APITestCase):
         url = reverse('Orders-detail', args=[order.id])
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-    
-
-
-    
-    
 
 
 
-from suppliers.models import Supplier
+from users.models import User
 
 from products.models import Product
 
@@ -69,14 +64,14 @@ from orderItems.models import OrderItem
 
 class ProductTests(APITestCase):
     def setUp(self):
-        self.supplier = Supplier.objects.create(name="Mwkali", email="mukali@gmail.com", phone="0724973222")
+        self.User = User.objects.create(name="Mwkali", email="mukali@gmail.com", phone="0724973222")
         self.product_data = {
             "name": "Milking Cans",
             "category": "Dairy Equipments",
             "description": "Milking cans are commonly used on dairy farms and are essential for maintaining the freshness and hygiene of milk during its journey from the cow to processing or consumption. ",
             "price": "1000.00",
             "stock": 20,
-            "supplierid": self.supplier.id,
+            "supplierid": self.User.id,
             "product_image_url": "https://kenyaagri.com/wp-content/uploads/2024/09/Stainles-milk-cans.jpg"
         }
 
@@ -96,14 +91,14 @@ class ProductTests(APITestCase):
 
 class OrderItemTests(APITestCase):
     def setUp(self):
-        self.supplier = Supplier.objects.create(name="Mwkali", email="mwkali@gmail.com", phone="0724973222")
+        self.User = User.objects.create(name="Mwkali", email="mwkali@gmail.com", phone="0724973222")
         self.product = Product.objects.create(
             name="Milking cans",
             category="Dairy Equipment",
             description="Milking cans are commonly used on dairy farms and are essential for maintaining the freshness and hygiene of milk during its journey from the cow to processing or consumption.",
             price="1000.00",
             stock=20,
-            supplierid=self.supplier.id,
+            supplierid=self.User.id,
             product_image_url="https://kenyaagri.com/wp-content/uploads/2024/09/Stainles-milk-cans.jpg"
         )
         self.order = orders.objects.create(order_date="2024-01-01")
@@ -126,4 +121,3 @@ class OrderItemTests(APITestCase):
         url = reverse('orderItems-list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
