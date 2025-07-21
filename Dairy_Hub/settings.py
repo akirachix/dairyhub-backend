@@ -48,6 +48,9 @@ INSTALLED_APPS = [
 
 ]
 
+
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -130,3 +133,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DARAJA_CONSUMER_KEY = 'neD60XV2vPuvOERNKrXKiNQYsuctjlqKTcGiJOBSyL6lWamh'
+DARAJA_CONSUMER_SECRET = 'nAcIRuXAqcOarjTOB6qn7UTSLzpA3ZWxzDuGAfa9jqnlImlCAMDvGcG4TrxDqtyL'
+DARAJA_SHORTCODE = '174379'
+DARAJA_PASSKEY = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'
+DARAJA_CALLBACK_URL = 'https://mydomain.com/path'
