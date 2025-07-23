@@ -32,7 +32,7 @@ DEBUG = os.getenv('DEBUG', 'False').lower() in ['true', '1', 'yes']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["Dairy_Hub", "127.0.0.1"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
