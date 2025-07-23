@@ -3,6 +3,8 @@ from rest_framework.routers import DefaultRouter
 from.views import OrderViewSet
 from django.urls import path ,include
 
+from .views import PaymentViewSet, STKPushView, daraja_callback
+
 from rest_framework.routers import DefaultRouter
 
 from .views import ProductViewSet
@@ -20,8 +22,11 @@ router.register(r"payment",PaymentViewSet,basename="payment")
 
 urlpatterns=[
     path("",include(router.urls)),
-    ]
+     path('daraja/stk-push/', STKPushView.as_view(), name='daraja-stk-push'),
+  path('daraja/callback/', daraja_callback, name='daraja-callback'),
+]
 
+    
 
 
 

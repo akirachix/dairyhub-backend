@@ -1,6 +1,5 @@
 from django.db import models
 
-from Orders.models import Order
 
 from users.models import User
 
@@ -9,7 +8,6 @@ from products.models import Product
 
 # Create your models here.
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, default=1)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     Supplier=models.ForeignKey(User,on_delete=models.CASCADE,limit_choices_to={'type':'Supplier'})
     quantity = models.IntegerField()
