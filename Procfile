@@ -1,1 +1,1 @@
-web: gunicorn Dairy_Hub.wsgi -log-file -
+web: gunicorn Dairy_Hub.wsgi --log-file -
