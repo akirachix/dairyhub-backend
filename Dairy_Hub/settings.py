@@ -32,7 +32,9 @@ DEBUG = os.getenv('DEBUG', 'False').lower() in ['true', '1', 'yes']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["Dairy_Hub", "127.0.0.1"]
+ALLOWED_HOSTS = ["*"]
+AUTH_USER_MODEL = 'users.User'  
+
 
 
 # Application definition
@@ -44,16 +46,29 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'Orders',
     'rest_framework',
+    'rest_framework.authtoken',
     'api',
     'products',
     'orderItems', 
     'users',
     'Payment',
+    'corsheaders',
     
 
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+}
 
 
 
@@ -61,6 +76,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -155,6 +171,7 @@ DARAJA_PASSKEY = os.getenv('DARAJA_PASSKEY')
 DARAJA_CALLBACK_URL = os.getenv('DARAJA_CALLBACK_URL')
 SECRET_KEY = os.getenv('SECRET_KEY')
 
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 
