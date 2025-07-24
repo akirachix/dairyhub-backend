@@ -4,7 +4,7 @@ class IsSupplier(permissions.BasePermission):
         return (
             request.user and
             request.user.is_authenticated and
-            request.user.type == 'supplier'
+            request.user.type == 'Supplier'
         )
 class IsFarmer(permissions.BasePermission):
     def has_permission(self, request, view):
@@ -13,9 +13,13 @@ class IsFarmer(permissions.BasePermission):
             request.user.is_authenticated and
             request.user.type == 'farmer'
         )
-class IsOwnerOrReadOnly(permissions.BasePermission):
-    def has_object_permission(self, request, view, obj):
+from rest_framework import permissions
+
+class IsFarmerOrSupplier(permissions.BasePermission):
+    def has_permission(self, request, view):
+        user = request.user
         return (
-            obj.user == request.user or
-            request.method in permissions.SAFE_METHODS
+            user and
+            user.is_authenticated and
+            (user.type == 'farmer' or user.type == 'Supplier')  
         )

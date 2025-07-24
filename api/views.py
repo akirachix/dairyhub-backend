@@ -30,7 +30,7 @@ from rest_framework import status
 from rest_framework.authtoken.models import Token
 
 from django.contrib.auth import authenticate
-from users.permission import IsFarmer, IsSupplier 
+from users.permission import IsFarmer, IsSupplier,IsFarmerOrSupplier 
 from .serializers import RegisterSerializer, LoginSerializer
 from users.models import User  
 from rest_framework import viewsets
@@ -78,7 +78,7 @@ class LoginUserView(APIView):
 class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated, IsFarmer]
+    permission_classes = [IsAuthenticated, IsFarmerOrSupplier]
 
     def get_queryset(self):
         return Order.objects.filter(farmer=self.request.user)
@@ -102,7 +102,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 class OrderItemViewSet(viewsets.ModelViewSet):
     serializer_class = OrderItemSerializer
     authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated, IsFarmer]
+    permission_classes = [IsAuthenticated, IsFarmerOrSupplier]
 
     def get_queryset(self):
         return OrderItem.objects.filter(order__farmer=self.request.user)

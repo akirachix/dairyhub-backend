@@ -4,7 +4,7 @@ from django.utils import timezone
 
 USER_TYPE_CHOICES = [
     ('farmer', 'Farmer'),
-    ('Supplier', 'Supplier'),  # lowercase for consistency
+    ('Supplier', 'Supplier'),  
 ]
 
 class UserManager(BaseUserManager):
@@ -22,7 +22,7 @@ class UserManager(BaseUserManager):
             type=user_type,
             created_at=timezone.now()
         )
-        user.set_password(password)  # hashes the password
+        user.set_password(password)
         user.save(using=self._db)
         return user
     
@@ -31,7 +31,7 @@ class UserManager(BaseUserManager):
             email=email,
             name=name,
             phone_number=phone_number,
-            user_type='Supplier',  # or another type; adjust as needed
+            user_type='Supplier',  
             password=password
         )
         user.is_staff = True
@@ -40,20 +40,24 @@ class UserManager(BaseUserManager):
         return user
 
 class User(AbstractBaseUser, PermissionsMixin):
+
+    USER_TYPE_CHOICES = [
+    ('farmer', 'Farmer'),
+    ('Supplier', 'Supplier'),  
+    ]
     user_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=15)
     email = models.EmailField(max_length=100, unique=True)
-    # password field is inherited (password_hash removed)
     created_at = models.DateTimeField(auto_now_add=True)
     type = models.CharField(max_length=20, choices=USER_TYPE_CHOICES)
     
     is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)  # required for admin
+    is_staff = models.BooleanField(default=False)  
     
     objects = UserManager()
 
-    USERNAME_FIELD = 'email'  # login identifier
+    USERNAME_FIELD = 'email'  
     REQUIRED_FIELDS = ['name', 'phone_number']
 
     def __str__(self):
