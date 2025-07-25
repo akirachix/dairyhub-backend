@@ -25,4 +25,3 @@ psycopg2-binary==2.9.10
 pycparser==2.22
 PyJWT==2.9.0
 python-decouple==3.8
-django-extensions==3.4.3
