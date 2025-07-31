@@ -119,10 +119,10 @@ class UserViewSet(viewsets.ModelViewSet):
 class PaymentViewSet(viewsets.ModelViewSet):
     serializer_class = PaymentSerializer
     authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated, IsFarmer]
+    permission_classes = [IsAuthenticated, IsFarmerOrSupplier]
 
     def get_queryset(self):
-        return Payment.objects.filter(farmer=self.request.user)
+        return Payment.objects.all()
 
     def perform_create(self, serializer):
         serializer.save(farmer=self.request.user)
